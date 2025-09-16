@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="GarmentPile++: Affordance-Driven Cluttered Garments Retrieval with Vision-Language Reasoning">
+  <meta name="keywords" content="Cluttered Garments, VLM Reasoning, Affordance">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    GarmentPile++
+  </title>
+
+  <!-- Thumbnail for social media sharing -->
+  <!-- <meta property="og:image" content="media/images/logo.png"> -->
+
+  <!-- Favicon -->
+  <!-- <link rel="icon" href="media/images/logo.png" type="image/jpeg"> -->
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <link rel="stylesheet" href="./static/source_serif_4.css">
+  <link rel="stylesheet" href="./static/source_sans_3.css">  
+  <link rel="stylesheet" href="./static/academicons.min.css">
+  <link rel="stylesheet" href="./static/fontawesome/css/fontawesome.css">
+  <link rel="stylesheet" href="./static/fontawesome/css/brands.css">
+  <link rel="stylesheet" href="./static/fontawesome/css/light.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+</head>
+<!-- <body onload="updateInTheWild();updateBimanual();"> -->
+
+<section class="hero">
+  <div class="hero-body" style="padding-top: 1.5%;">
+    <div class="container is-fullhd">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <img src="media/images/GarmentPile++_title.png" alt="ReKep" style="display: block; margin: 0 auto; width: 50%">
+          <br>
+          <img src="media/images/GarmentPile++_subtitle.png" alt="ReKep" style="display: block; margin: 0 auto; width: 90%">
+          <br>
+          <!-- <h1 class="title is-1 publication-title" style="color:#775295;">in Imitation Learning for Robotic Manipulation</h1> -->
+          <div class="is-size-4 accepted" style="color:#ad1010">
+            Under Review
+          </div>
+          <!-- <div class="is-size-4 award" style="color:#ad1010">
+            Best Paper Award at Workshop on X-Embodiment Robot Learning, CoRL 2024
+          </div> -->
+          <br>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block" style="color:#ad1010">
+              <a target="_blank" href="https://github.com/wayrise">Yuran Wang</a><sup>1*</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://warshallrho.github.io/">Ruihai Wu</a><sup>1*</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://yuechen0614.github.io/homepage/">Yue Chen</a><sup>1*</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://github.com/Jr-kelly">Jiarui Wang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://github.com/SCreatorX">Jiaqi Liang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://alwaysleepy.github.io/">Ziyu Zhu</a><sup>1</sup>,
+            </span>
+            <br>
+            <span class="author-block">
+              <a target="_blank" href="https://geng-haoran.github.io/">Haoran Geng</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://people.eecs.berkeley.edu/~malik/">Jitendra Malik</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://people.eecs.berkeley.edu/~pabbeel/">Pieter Abbeel</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a target="_blank" href="https://zsdonghao.github.io/">Hao Dong</a><sup>1</sup>
+            </span>
+          </div>
+          <div class="is-size-5 affiliation">
+            <sup>1</sup>Peking University,
+            <sup>2</sup>University of California, Berkeley
+          </div>
+          <br>
+          <div class="affiliation-note">
+            <sup>*</sup> indicates equal contributions
+          </div>
+          <div class="button-container">
+            <a href="https://arxiv.org/pdf/2505.11032" target="_blank" class="button" style="background-color: #f2f2f2;border: transparent;"><i class="ai ai-arxiv"></i>&emsp14;arXiv</a>
+            <!-- <a href="https://wayrise.github.io/DexGarmentLab/" target="_blank" class="button" style="background-color: #f2f2f2;border: transparent;"><i class="ai ai-arxiv"></i>&emsp14;Page</a> -->
+            <!-- <a href="https://youtu.be/2S8YhBdLdww" target="_blank" class="button"><i class="fa-light fa-film"></i>&emsp14;Video</a> -->
+            <!-- <a href="https://x.com/wenlong_huang/status/1829135436717142319" target="_blank" class="button"><i class="fa-brands fa-x-twitter"></i>&emsp14;tl;dr</a> -->
+            <a href="https://github.com/wayrise/DexGarmentLab" target="_blank" class="button" style="background-color: #f2f2f2;border: transparent;"><i class="fa-light fa-code"></i>&emsp14;Code</a>
+            <a href="https://huggingface.co/datasets/wayrise/DexGarmentLab/tree/main" target="_blank" class="button" style="background-color: #f2f2f2;border: transparent;"><i class="fa-light fa-folder"></i>&emsp14;Data</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-widescreen">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-vcentered  is-centered">
+          <video id="teaser" autoplay muted loop controls height="100%" width="100%">
+            <source src="media/videos/teaser_nomask.mp4"
+                    type="video/mp4">
+          </video>
+          </br>
+        </div>
+        <br>
+        <h2 class="subtitle has-text-centered">
+        We show that with proper data scaling, a single-task policy can generalize well to <strong>any new environment</strong> and 
+        <strong>any new object</strong> within the same category. Remarkably, the robot can even be deployed zero-shot in a hot pot restaurant 🍲!
+        </h2>
+      </div>
+    </div>
+  </div> -->
+
+<br>
+<div class="container is-max-widescreen">
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-3" style="margin-bottom: 0.5em; color:#ad1010">Abstract</h2>
+    <div class="content has-text-justified">
+      <p>
+          Garment manipulation is a critical challenge due to the diversity in garment categories, geometries, and deformations. 
+          Despite this, humans can effortlessly handle garments, thanks to the dexterity of our hands. 
+          However, existing research in the field has struggled to replicate this level of dexterity, primarily hindered by the lack of realistic simulations of dexterous garment manipulation.
+          Therefore, we propose <b>DexGarmentLab</b>, the first environment specifically designed for dexterous (especially bimanual) garment manipulation, 
+          which features large-scale high-quality 3D assets for 15 task scenarios, and refines simulation techniques tailored for garment modeling to reduce the sim-to-real gap. 
+          Previous data collection typically relies on teleoperation or training expert reinforcement learning (RL) policies, which are labor-intensive and inefficient.
+          In this paper, we leverage <b>garment structural correspondence</b> to <b>automatically</b> generate a dataset with diverse trajectories using only a single expert demonstration, significantly reducing manual intervention.
+          However, even extensive demonstrations cannot cover the infinite states of garments, which necessitates the exploration of new algorithms. 
+          To improve generalization across diverse garment shapes and deformations, we propose a <b>Hierarchical gArment-manipuLation pOlicy (HALO)</b>.
+          It first identifies transferable affordance points to accurately locate the manipulation area, then generates generalizable trajectories to complete the task.
+          Through extensive experiments and detailed analysis of our method and baseline, we demonstrate that HALO consistently outperforms existing methods, 
+          successfully generalizing to previously unseen instances even with significant variations in shape and deformation where others fail.
+        </p>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+<div class="rows is-centered has-text-centered">
+  <h2 class="title is-3" style="margin-bottom: 0.5em; color:#ad1010">Overview</h2>
+  <!-- <img src="media/images/Teaser.jpg" class="method-image" /> -->
+  <!-- <div class="columns is-vcentered  is-centered">
+    <video id="teaser" autoplay muted loop  height="90%" width="90%">
+      <source src="media/videos/curve.mp4"
+              type="video/mp4">
+    </video>
+  </div> -->
+  <!-- button -->
+  <div style="display: flex; justify-content: center; gap: 1em; margin-bottom: 1em;">
+    <button class="button is-outlined" id="btn-static"
+      style="color: #ad1010; border-color: #ad1010;" onclick="showStatic()">
+      Static
+    </button>
+    <button class="button is-outlined" id="btn-workflow"
+      style="color: #ad1010; border-color: #ad1010;" onclick="showWorkflow()">
+      Workflow
+    </button>
+  </div>
+
+  <!-- img (default visible) -->
+  <div id="staticContent" class="has-text-centered">
+    <img src="media/images/Teaser.jpg" class="method-image" style="max-width: 100%;" />
+  </div>
+
+  <!-- vedio (default hidden) -->
+  <div id="workflowContent" class="has-text-centered" style="display: none;">
+    <video controls muted autoplay loop controlsList="nodownload" width="99%">
+      <source src="media/videos/Teaser_Workflow.mp4" type="video/mp4">
+    </video>
+  </div>
+  <br>
+  <p class="content has-text-justified" style="margin-bottom: 0.6em">
+    <b>DexGarmentLab</b> includes three major components:
+    <br>
+    &nbsp;&nbsp;- <b>Environment</b>: We propose <u>Dexterous Garment Manipulation Environment</u> with 15 different task scenes (especially for bimanual coordination) based on 2500+ garments.
+    <br>
+    &nbsp;&nbsp;- <b>Automated Data Collection</b>: Because of the same structure of category-level garment, category-level generalization is accessible, which empowers our proposed <u>Automated Data Collection Pipeline</u> to handle different position, deformation and shapes of garment with task config (including grasp position and task sequence) and grasp hand pose provided by single expert demonstration.
+    <br>
+    &nbsp;&nbsp;- <b>Generalizable Policy</b>: With diverse collected demonstration data, we introduce <u> <b>H</b>ierarchical g<b>A</b>rment manipu<b>L</b>ation p<b>O</b>licy (<b>HALO</b>) </u>, combining affordance points and trajectories to generalize across different attributes in different tasks.
+  </p>
+</div>
+
+<br>
+<br>
+<div class="rows is-centered has-text-centered">
+  <h2 class="title is-3" style="margin-bottom: 0.5em; color:#ad1010">Simulation Environment</h2>
+  <p class="content has-text-justified" style="margin-bottom: 0.6em">
+    We introduce adhesion (<i>between particle and rigid</i>), friction (<i>between particle and rigid</i>) and particle-scale (<i>between particles</i>) parameters to enhance realism for physical garment simulation.
+  </p>
+  <img src="media/images/Garment-Robot-Interaction.jpg" class="method-image" />
+  <br>
+  <p class="content has-text-justified" style="margin-bottom: 0.6em">
+    <b>Benefiting from friction and adhesion, dexhands can grasp and lift garments based on physical force without attach blocks.</b>
+  </p>
+  <img src="media/images/Garment-Self-Interaction.jpg" class="method-image" />
+  <br>
+  <p class="content has-text-justified" style="margin-bottom: 0.6em">
+    <b>Particle-adhesion (or -friction)-scale stabilizes the particle system, preventing excessive self-collisions between particles which cause garments to become disorganized.</b>
+  </p>
+  <img src="media/images/Benchmark.jpg" class="method-image" />
+  <!-- <div class="columns is-vcentered  is-centered">
+    <video id="teaser" autoplay muted loop  height="90%" width="90%">
+      <source src="media/videos/curve.mp4"
+              type="video/mp4">
+    </video>
+  </div> -->
+  <br>
+  <p class="content has-text-justified" style="margin-bottom: 0.6em">
+    We introduce 15 garment manipulation tasks across 8 categories, 
+    encompassing both <b>garment-self-interaction</b> (e.g., Fling, Fold) and <b>garment-environment-interaction</b> (e.g., Hang, Wear, Store) scenarios.
+    In garment-self-interaction tasks, key variables include garment position, orientation, and shape. In garment-environment-interaction tasks, environment-interaction assets positions (e.g., hangers, pothooks, humans, etc.) are also considered.
+  </p>
+</div>
+
+<br>
+<br>
+<div class="rows is-centered has-text-centered">
+  <h2 class="title is-3" style="margin-bottom: 0.5em; color:#ad1010">Automated Data Collection</h2>
+  <!-- <img src="media/images/Data_Collection.jpg" class="method-image" /> -->
+  <!-- <div class="columns is-vcentered  is-centered">
+    <video id="teaser" autoplay muted loop  height="90%" width="90%">
+      <source src="media/videos/curve.mp4"
+              type="video/mp4">
+    </video>
+  </div> -->
+  <!-- button -->
+  <div style="display: flex; justify-content: center; gap: 1em; margin-bottom: 1em;">
+    <button class="button is-outlined" id="btn-static_1"
+      style="color: #ad1010; border-color: #ad1010;" onclick="showStatic_1()">
+      Static
+    </button>
+    <button class="button is-outlined" id="btn-workflow_1"
+      style="color: #ad1010; border-color: #ad1010;" onclick="showWorkflow_1()">
+      Workflow
+    </button>
+  </div>
+
+  <!-- image (default visible) -->
+  <div id="staticContent_1" class="has-text-centered">
+    <img src="media/images/Data_Collection.jpg" class="method-image" style="max-width: 100%;" />
+  </div>
+
+  <!-- vedio (default hidden) -->
+  <div id="workflowContent_1" class="has-text-centered" style="display: none;">
+    <video controls muted autoplay loop controlsList="nodownload" width="99%">
+      <source src="media/videos/Data_Workflow.mp4" type="video/mp4">
+    </video>
+  </div>
+  <br>
+  <p class="content has-text-justified" style="margin-bottom: 0.6em">
+    <b>Automated Data Collection Pipeline: </b>
+    <br>
+    &nbsp;&nbsp; (1) For a given task, we begin with a single expert demonstration to extract key information: <b>demo hand grasp poses</b>, <b>demo task sequences</b>, and <b>demo grasp points on the garment</b>. 
+    <br>
+    &nbsp;&nbsp; (2) Leveraging the <b>Garment Affordance Model (GAM)</b>, we use affordance to identify target grasp points on novel garments with diverse deformations corresponding to demo grasp points. 
+    <br>
+    &nbsp;&nbsp; (3) Finally, the pipeline executes the task sequence based on inferred points and hand grasp poses, thereby enabling <b>automated, efficient and scalable data collection</b>.
+    <br>
+    <b>Attention:</b> The trajectories are adaptive to garment strctures and scene configurations, 
+    which means for different garments and scenes, the trajectories (including lifting height, push position, etc.) are different.
+  </p>
+  <p class="content has-text-justified" style="margin-bottom: 0.6em">
+    Here shows task initialization and randomization figure of different tasks and three whole-procedure videos each task with different configurations.
+  </p>
+
+  <h4 class="title is-3" style="margin-bottom: 0.5em; color:#e67979; font-size: 28px;">Task Configuration Diagram</h4>
+
+  <div class="columns">
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_fold_tops.jpg" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Fold Tops</figcaption>
+      </figure>
+    </div>
+
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_fold_dress.png" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Fold Dress</figcaption>
+      </figure>
+    </div>
+
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_fold_trousers.png" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Fold Trousers</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_fling_tops.png" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Fling Tops</figcaption>
+      </figure>
+    </div>
+
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/fling_ori_randomization.png" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Fling orientation randomization</figcaption>
+      </figure>
+    </div>
+
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_fling_dress.png" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Fling Dress</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_fling_trousers.png" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Fling Trousers</figcaption>
+      </figure>
+    </div>
+
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_hang_coat.png" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Hang Coat</figcaption>
+      </figure>
+    </div>
+
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_store_tops.png" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Store Tops</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_hang_tops.png" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Hang Tops</figcaption>
+      </figure>
+    </div>
+
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_hang_dress.png" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Hang Dress</figcaption>
+      </figure>
+    </div>
+
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_hang_trousers.jpg" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Hang Trousers</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_wear_baseballcap.png" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Wear Baseball Cap</figcaption>
+      </figure>
+    </div>
+
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_wear_bowlhat.png" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Wear Bowl Hat</figcaption>
+      </figure>
+    </div>
+
+    <div class="column has-text-centered">
+      <figure>
+        <img src="media/images/task_wear_scarf.png" class="method-image" />
+        <figcaption style="margin-top: 0.5em;">Wear Scarf</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <h4 class="title is-3" style="margin-bottom: 0.5em; color:#e67979; font-size: 28px;">Task Whole-Procedure Vedio</h4>
+
+  <div class="container block is-centered">
+    <div class="columns is-centered">
+      <div class="column is-3">
+        <div class="select is-fullwidth">
+          <select id="task-selection" onchange="updateVideos()">
+            <option value="fling_dress">fling_dress</option>
+            <option value="fling_tops">fling_tops</option>
+            <option value="fling_trousers">fling_trousers</option>
+            <option value="fold_tops">fold_tops</option>
+            <option value="fold_dress">fold_dress</option>
+            <option value="fold_trousers">fold_trousers</option>
+            <option value="hang_coat" selected>hang_coat</option>
+            <option value="hang_dress">hang_dress</option>
+            <option value="hang_tops">hang_tops</option>
+            <option value="hang_trousers">hang_trousers</option>
+            <option value="wear_baseballcap">wear_baseballcap</option>
+            <option value="wear_bowlhat">wear_bowlhat</option>
+            <option value="wear_scarf">wear_scarf</option>
+            <option value="wear_glove">wear_glove</option>
+            <option value="store_tops">store_tops</option>
+          </select>
+        </div>
+      </div>
+      <div class="column is-2">
+        <button class="button is-info is-outlined" id="shuffle-video" style="width: 100%; color: #ad1010; border-color: #ad1010;">
+          <span class="icon">
+            <ion-icon name="shuffle-outline" role="img" class="md hydrated"></ion-icon>
+          </span>
+          <span>Shuffle</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="video-container" class="columns is-centered">
+    <div class="column has-text-centered">
+      <video controls muted autoplay loop controlsList="nodownload" width="99%">
+        <source src="media/videos/data_collection/hang_coat/0.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="column has-text-centered">
+      <video controls muted autoplay loop controlsList="nodownload" width="99%">
+        <source src="media/videos/data_collection/hang_coat/1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="column has-text-centered">
+      <video controls muted autoplay loop controlsList="nodownload" width="99%">
+        <source src="media/videos/data_collection/hang_coat/2.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</div>
+
+<!-- <br>
+<br>
+<br>
+<section class="section" style="padding: 0;">
+  <div class="container is-max-widescreen">
+
+    <div class="rows">
+
+      <div class="container has-text-centered">
+        <h2 class="title is-3" style="margin-bottom: 0.5em; color:#ad1010">Gneralizable Policy (HALO)</h2>
+        <div style="display: flex; justify-content: center; gap: 1em; margin-bottom: 1em;">
+          <button class="button is-outlined" id="btn-static_2"
+            style="color: #ad1010; border-color: #ad1010;" onclick="showStatic_2()">
+            Static
+          </button>
+          <button class="button is-outlined" id="btn-workflow_2"
+            style="color: #ad1010; border-color: #ad1010;" onclick="showWorkflow_2()">
+            Workflow
+          </button>
+        </div>
+
+        <div id="staticContent_2" class="has-text-centered">
+          <img src="media/images/Policy.jpg" class="method-image" style="max-width: 100%;" />
+        </div>
+
+        <div id="workflowContent_2" class="has-text-centered" style="display: none;">
+          <video controls muted autoplay loop controlsList="nodownload" width="99%">
+            <source src="media/videos/Policy_Workflow.mp4" type="video/mp4">
+          </video>
+        </div>
+        <br>
+        <p class="content" style="margin-bottom: 1.5em; text-align: left;">
+          We adopt hierarchical structure to implement Generalizable Policy (HALO), achieving better generalization in garment manipulation than previous imitation learning algorithms, 
+          which consists of two stages:
+          <br>
+          &nbsp;&nbsp; <b>Stage &#8544;</b>: We use <b>GAM</b> to generate generalizable affordance points, which will be used for robots to locate and move to target area.
+          <br>
+          &nbsp;&nbsp; <b>Stage &#8545;</b>: we introduce <b>Structure-Aware Diffusion Policy (SADP)</b>, 
+          which extracts features from <u>garment point cloud (with left and right point affordances as binding features)</u>, 
+          <u>interaction-object point cloud</u>, <u>environment point cloud</u> and <u>robot joint states</u> as condition to generate joint actions 
+          (including 24 DOF for each hand and 6 DOF for each arm, totally 60 DOF).
+          <br>
+          Please refer to paper for detailed analysis. Here we show the real-world setup and execution of HALO.
+        </p>
+
+        <h3 class="title is-3" style="margin-bottom: 0.5em; color:#e67979; font-size: 28px;">Real-World Setup</h3>
+
+        <div class="column has-text-centered">
+          <figure>
+            <img src="media/images/setup.jpg" class="method-image" />
+            <figcaption style="margin-top: 0.5em;">Real-World Setup</figcaption>
+          </figure>
+        </div>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+            <figure>
+              <img src="media/images/fold_test_sample.jpg" class="method-image" />
+              <figcaption style="margin-top: 0.5em;">Test Samples (Fold Tops Task)</figcaption>
+            </figure>
+          </div>
+
+          <div class="column has-text-centered">
+            <figure>
+              <img src="media/images/hang_test_sample.jpg" class="method-image" />
+              <figcaption style="margin-top: 0.5em;">Test Samples (Hang Tops Task)</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+            <figure>
+              <img src="media/images/hat_test_sample.jpg" class="method-image" />
+              <figcaption style="margin-top: 0.5em;">Test Samples (Wear Hat Task)</figcaption>
+            </figure>
+          </div>
+
+          <div class="column has-text-centered">
+            <figure>
+              <img src="media/images/scarf_test_sample.jpg" class="method-image" />
+              <figcaption style="margin-top: 0.5em;">Test Samples (Wear Scarf Task)</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <h3 class="title is-3" style="margin-bottom: 0.5em; color:#e67979; font-size: 28px;">Real-World Videos</h3>
+
+        <div id="video-container" class="columns is-centered">
+          <div class="column has-text-centered">
+            <video controls muted autoplay loop controlsList="nodownload" width="99%">
+              <source src="media/videos/real_world/fold_tops_1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <video controls muted autoplay loop controlsList="nodownload" width="99%">
+              <source src="media/videos/real_world/fold_tops_2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <video controls muted autoplay loop controlsList="nodownload" width="99%">
+              <source src="media/videos/real_world/fold_tops_3.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 0.15; font-size: 16px; color: #333;">
+          <b>Fold Tops</b> Real-World Videos
+        </p>
+
+        <br>
+
+        <div id="video-container" class="columns is-centered">
+          <div class="column has-text-centered">
+            <video controls muted autoplay loop controlsList="nodownload" width="99%">
+              <source src="media/videos/real_world/hang_tops_1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <video controls muted autoplay loop controlsList="nodownload" width="99%">
+              <source src="media/videos/real_world/hang_tops_2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <video controls muted autoplay loop controlsList="nodownload" width="99%">
+              <source src="media/videos/real_world/hang_tops_3.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 0.15; font-size: 16px; color: #333;">
+          <b>Hang Tops</b> Real-World Videos
+        </p>
+
+        <br>
+
+        <div id="video-container" class="columns is-centered">
+          <div class="column has-text-centered">
+            <video controls muted autoplay loop controlsList="nodownload" width="99%">
+              <source src="media/videos/real_world/wear_hat_1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <video controls muted autoplay loop controlsList="nodownload" width="99%">
+              <source src="media/videos/real_world/wear_hat_2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <video controls muted autoplay loop controlsList="nodownload" width="99%">
+              <source src="media/videos/real_world/wear_hat_3.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 0.15; font-size: 16px; color: #333;">
+          <b>Wear Hat</b> Real-World Videos
+        </p>
+
+        <br>
+
+        <div id="video-container" class="columns is-centered">
+          <div class="column has-text-centered">
+            <video controls muted autoplay loop controlsList="nodownload" width="99%">
+              <source src="media/videos/real_world/wear_scarf_1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <video controls muted autoplay loop controlsList="nodownload" width="99%">
+              <source src="media/videos/real_world/wear_scarf_2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <video controls muted autoplay loop controlsList="nodownload" width="99%">
+              <source src="media/videos/real_world/wear_scarf_3.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 0.15; font-size: 16px; color: #333;">
+          <b>Wear Scarf</b> Real-World Videos
+        </p>
+
+        <br>
+        <p class="content has-text-justified" style="margin-bottom: 0.6em">
+          We select Fold_Tops (Garment-Self-Interaction), Hang_Tops, Wear_Scarf, Wear_Hat (Garment-Environment-Interaction) as typical tasks for illustration. 
+          The test samples have different shapes, length, deformations while position of garments and interaction objects are variable. 
+          Despite this, <b>GAM of HALO</b> ensures <u>accurate manipulation area location for grasp</u> while <b>SADP of HALO</b> ensures <u>adaptive trajectories base on garment and interaction object</u>.
+         </p>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- <br>
+<br>
+<h2 class="title is-3 is-centered has-text-centered" style="color:#ad1010;">BibTeX</h2>
+<p class="bibtex">
+@misc{wang2025dexgarmentlab,<br>
+&nbsp;&nbsp; title={DexGarmentLab: Dexterous Garment Manipulation Environment with Generalizable Policy},<br>
+&nbsp;&nbsp; author={Yuran Wang and Ruihai Wu and Yue Chen and Jiarui Wang and Jiaqi Liang and Ziyu Zhu and Haoran Geng and Jitendra Malik and Pieter Abbeel and Hao Dong},<br>
+&nbsp;&nbsp; year={2025},<br>
+&nbsp;&nbsp; eprint={2505.11032},<br>
+&nbsp;&nbsp; archivePrefix={arXiv},<br>
+&nbsp;&nbsp; primaryClass={cs.RO},<br>
+&nbsp;&nbsp; url={https://arxiv.org/abs/2505.11032},<br>
+}
+</p> -->
+
+</section>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <p>
+            Website template borrowed from <a href="https://nerfies.github.io">Nerfies</a>
+            and <a href="https://rekep-robot.github.io/">ReKep</a>. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- <script>
+  document.getElementById('shuffle-video').addEventListener('click', function() {
+    var envSelect = document.getElementById('env-selection');
+    var taskSelect = document.getElementById('task-selection');
+    var objectSelect = document.getElementById('object-selection');
+    randomizeSelect(envSelect);
+    randomizeSelect(taskSelect);
+    randomizeSelect(objectSelect);
+    console.log("Shuffle", envSelect.value, taskSelect.value, objectSelect.value)
+    SelectTestVideo();
+  });
+
+  function randomizeSelect(selectElement) {
+    var options = selectElement.options;
+    random_move = Math.random();
+    var randomIndex = Math.floor(Math.random() * options.length);
+    selectElement.selectedIndex = randomIndex;
+  }
+
+  function SelectTestVideo() {
+    var env_id = document.getElementById("env-selection").value;
+    var task_name = document.getElementById("task-selection").value;
+    var object_id = document.getElementById("object-selection").value;
+
+    console.log("SelectTestVideo", env_id, task_name, object_id)
+    var video = document.getElementById("test-video");
+    video.src = "media/videos/test-wild-videos/" + env_id + "/" + 
+                task_name + "/" + object_id + ".mp4";
+    video.play();
+  }
+</script> -->
+
+<script>
+  const videoContainer = document.getElementById("video-container");
+  const taskSelect = document.getElementById("task-selection");
+
+  document.getElementById("shuffle-video").addEventListener("click", function () {
+    const options = taskSelect.options;
+    const randomIndex = Math.floor(Math.random() * options.length);
+    taskSelect.selectedIndex = randomIndex;
+    updateVideos();
+  });
+
+  function updateVideos() {
+    const task = taskSelect.value;
+    videoContainer.innerHTML = ""; // 清空当前视频区域
+
+    if (task === "wear_glove") {
+      // 单个视频居中显示
+      videoContainer.className = "columns is-centered";
+      videoContainer.innerHTML = `
+        <div class="column is-4 has-text-centered">
+          <video controls muted autoplay loop controlsList="nodownload" width="99%">
+            <source src="media/videos/data_collection/${task}/0.mp4" type="video/mp4">
+          </video>
+        </div>
+      `;
+    } else {
+      // 三个视频并排显示
+      videoContainer.className = "columns";
+      for (let i = 0; i < 3; i++) {
+        const column = document.createElement("div");
+        column.className = "column has-text-centered";
+        column.innerHTML = `
+          <video controls muted autoplay loop controlsList="nodownload" width="99%">
+            <source src="media/videos/data_collection/${task}/${i}.mp4" type="video/mp4">
+          </video>
+        `;
+        videoContainer.appendChild(column);
+      }
+    }
+  }
+
+  function showStatic() {
+    document.getElementById('staticContent').style.display = 'block';
+    document.getElementById('workflowContent').style.display = 'none';
+    highlightButton('static');
+  }
+
+  function showWorkflow() {
+    document.getElementById('staticContent').style.display = 'none';
+    document.getElementById('workflowContent').style.display = 'block';
+    highlightButton('workflow');
+  }
+
+  function highlightButton(active) {
+    const btnStatic = document.getElementById('btn-static');
+    const btnWorkflow = document.getElementById('btn-workflow');
+
+    if (active === 'static') {
+      btnStatic.classList.add('is-info');
+      btnWorkflow.classList.remove('is-info');
+    } else {
+      btnWorkflow.classList.add('is-info');
+      btnStatic.classList.remove('is-info');
+    }
+  }
+
+  // initial Highlight Static
+  highlightButton('static');
+</script>
+
+<script>
+  function showStatic_1() {
+    document.getElementById('staticContent_1').style.display = 'block';
+    document.getElementById('workflowContent_1').style.display = 'none';
+    highlightButton_1('static');
+  }
+
+  function showWorkflow_1() {
+    document.getElementById('staticContent_1').style.display = 'none';
+    document.getElementById('workflowContent_1').style.display = 'block';
+    highlightButton_1('workflow');
+  }
+
+  function highlightButton_1(active) {
+    const btnStatic_1 = document.getElementById('btn-static_1');
+    const btnWorkflow_1 = document.getElementById('btn-workflow_1');
+
+    if (active === 'static') {
+      btnStatic_1.classList.add('is-info');
+      btnWorkflow_1.classList.remove('is-info');
+    } else {
+      btnWorkflow_1.classList.add('is-info');
+      btnStatic_1.classList.remove('is-info');
+    }
+  }
+
+  // 初始状态高亮 static
+  highlightButton_1('static');
+</script>
+
+<script>
+  function showStatic_2() {
+    document.getElementById('staticContent_2').style.display = 'block';
+    document.getElementById('workflowContent_2').style.display = 'none';
+    highlightButton_2('static');
+  }
+
+  function showWorkflow_2() {
+    document.getElementById('staticContent_2').style.display = 'none';
+    document.getElementById('workflowContent_2').style.display = 'block';
+    highlightButton_2('workflow');
+  }
+
+  function highlightButton_2(active) {
+    const btnStatic_2 = document.getElementById('btn-static_2');
+    const btnWorkflow_2 = document.getElementById('btn-workflow_2');
+
+    if (active === 'static') {
+      btnStatic_2.classList.add('is-info');
+      btnWorkflow_2.classList.remove('is-info');
+    } else {
+      btnWorkflow_2.classList.add('is-info');
+      btnStatic_2.classList.remove('is-info');
+    }
+  }
+
+  // 初始状态高亮 static
+  highlightButton_2('static');
+</script>
+
+<style>
+  .button.is-info.is-outlined:focus,
+  .button.is-info.is-outlined:active {
+    background-color: transparent;
+    border-color: #ad1010;
+    color: #ad1010;
+    box-shadow: none;
+  }
+
+  .button.is-info.is-outlined:hover {
+    background-color: #ad1010;
+    color: #fff;
+  }
+
+  .button.is-info.is-outlined:hover .icon ion-icon,
+  .button.is-info.is-outlined:hover span {
+    color: #fff;
+  }
+</style>
+
+</body>
+</html>
