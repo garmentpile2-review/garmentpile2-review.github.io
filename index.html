@@ -259,7 +259,7 @@
 </div>
 <br>
 <div class="columns is-centered has-text-centered">
-  <div class="column" style="flex: none; width: 100%;">
+  <div class="column" style="flex: none; width: 84%;">
     <h2 style="
         font-family: Georgia, 'Cambria', 'Times New Roman', serif;
         font-size: 2.2em; 
@@ -267,38 +267,8 @@
         color: #000000; 
         margin-bottom: 0.6em;
         border-bottom: 1px solid #eef;">
-      Results
-    </h2>
-    <div style="text-align: left;">
-      <p>
-        We load 9 categories (dress, trousers, tops, skirt, socks, glove, hat, scarf and underpants) of 153 different garments from ClothesNet.
-        In the Open-Boundary Scenario, 6–16 garments will be loaded to form garment piles; in the Closed-Boundary Scenario, the quantity of garments employed will be 3–8. 
-        What's more, there are two types of typical tasks conducted in each scenario:
-      </p>
-      <ul style="list-style-type: disc; padding-left: 2em;">
-        <li>
-          <i>Task A: Retrieve Garments Sequentially.</i> 
-          The robot is required to continue retrieving until no garments remain in the observation field.
-        </li>
-        <li>
-          <i>Task B: Retrieve a Piece of Specific Garment.</i> 
-          The robot needs to retrieve until the target garment (e.g., hat, glove, green tops, black trousers, etc.) is retrieved.
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-<br>
-<div class="columns is-centered has-text-centered">
-  <div class="column" style="flex: none; width: 84%;">
-    <h3 style="
-        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
-        font-size: 1.8em; 
-        font-weight: 700; 
-        color: #000000; 
-        margin-bottom: 0.6em;">
       Mask Fine Tuning
-    </h3>
+    </h2>
     <!-- image (default visible) -->
     <div id="staticContent_1" class="has-text-centered">
       <img src="media/images/Mask_Fine_Tuning.png" class="method-image" style="max-width: 99%;" />
@@ -315,14 +285,15 @@
       </p>
     </div>
     <br>
-    <h3 style="
+    <h2 style="
         font-family: Georgia, 'Cambria', 'Times New Roman', serif;
-        font-size: 1.8em; 
+        font-size: 2.2em; 
         font-weight: 700; 
         color: #000000; 
-        margin-bottom: 0.6em;">
+        margin-bottom: 0.6em;
+        border-bottom: 1px solid #eef;">
       Affordance
-    </h3>
+    </h2>
     <!-- image (default visible) -->
     <div id="staticContent_1" class="has-text-centered">
       <img src="media/images/Affordance.png" class="method-image" style="max-width: 70%;" />
@@ -337,14 +308,15 @@
       </p>
     </div>
     <br>
-    <h3 style="
+    <h2 style="
         font-family: Georgia, 'Cambria', 'Times New Roman', serif;
-        font-size: 1.8em; 
+        font-size: 2.2em; 
         font-weight: 700; 
         color: #000000; 
-        margin-bottom: 0.6em;">
+        margin-bottom: 0.6em;
+        border-bottom: 1px solid #eef;">
       Reasoning Procedure
-    </h3>
+    </h2>
     <!-- image (default visible) -->
     <div id="staticContent_1" class="has-text-centered">
       <img src="media/images/Reasoning_Procedure.png" class="method-image" style="max-width: 99%;" />
@@ -356,21 +328,6 @@
         For specific garment retrieval (row 2), it inters to remove obstructing garments so that the target garment is quickly exposed and ready for retrieving.
       </p>
     </div>
-    <br>
-    <h3 style="
-        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
-        font-size: 1.8em; 
-        font-weight: 700; 
-        color: #000000; 
-        margin-bottom: 0.6em;">
-      Real-World Setup
-    </h3>
-    <div id="staticContent_1" class="has-text-centered">
-      <img src="media/images/Real_World_Setup.png" class="method-image" style="max-width: 75%;" />
-    </div>
-    <p>
-    We use ARX x7s as real-world robot and RealSense D405 as head camera for images capture.
-    </p>
   </div>
 </div>
 <br>
@@ -393,65 +350,67 @@
         margin-bottom: 0.6em;">
       Simulation Videos
     </h3>
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center;">
-      <div style="grid-column: span 2;">
-        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Sequentially Retrieve (Closed)</h4>
-      </div>
-      <div>
-        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Retrieve <span style="color: cyan;">Cyan</span> Tops (Closed)</h4>
-      </div>
-      <div>
-        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Retrieve Glove (Closed)</h4>
-      </div>
-      <div>
-        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+    <div style="text-align: center;">
+      <h3 style="font-weight: 700; margin-bottom: 0.5em;">
+        Sequentially Retrieve (Closed)
+      </h3>
+      <div style="display: flex; justify-content: center; gap: 20px;">
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 500px;">
           <source src="media/videos/close_retrieve_sequentially_1.mp4" type="video/mp4">
         </video>
-      </div>
-      <div>
-        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 500px;">
           <source src="media/videos/close_retrieve_sequentially_2.mp4" type="video/mp4">
         </video>
       </div>
-      <div>
-        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+    </div>
+    <br>
+    <div style="display: flex; justify-content: center; gap: 20px;">
+      <div style="text-align: center;">
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">
+          Retrieve <span style="color: cyan;">Cyan</span> Tops (Closed)
+        </h4>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 500px;">
           <source src="media/videos/close_retrieve_cyan_tops.mp4" type="video/mp4">
         </video>
       </div>
-      <div>
-        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+      <div style="text-align: center;">
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">
+          Retrieve Glove (Closed)
+        </h4>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 500px;">
           <source src="media/videos/close_retrieve_glove.mp4" type="video/mp4">
         </video>
       </div>
     </div>
     <br>
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center;">
-      <div style="grid-column: span 2;">
-        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Sequentially Retrieve (Open)</h4>
-      </div>
-      <div>
-        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Retrieve <span style="color: red;">Red</span> Pants (Open)</h4>
-      </div>
-      <div>
-        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Retrieve Striped Dress (Open)</h4>
-      </div>
-      <div>
-        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+    <div style="text-align: center;">
+      <h3 style="font-weight: 700; margin-bottom: 0.5em;">
+        Sequentially Retrieve (Open)
+      </h3>
+      <div style="display: flex; justify-content: center; gap: 20px;">
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 500px;">
           <source src="media/videos/open_retrieve_sequentially_1.mp4" type="video/mp4">
         </video>
-      </div>
-      <div>
-        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 500px;">
           <source src="media/videos/open_retrieve_sequentially_2.mp4" type="video/mp4">
         </video>
       </div>
-      <div>
-        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+    </div>
+    <br>
+    <div style="display: flex; justify-content: center; gap: 20px;">
+      <div style="text-align: center;">
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">
+          Retrieve <span style="color: red;">Red</span> Pants (Open)
+        </h4>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 500px;">
           <source src="media/videos/open_retrieve_red_pants.mp4" type="video/mp4">
         </video>
       </div>
-      <div>
-        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+      <div style="text-align: center;">
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">
+          Retrieve Striped Dress (Open)
+        </h4>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 500px;">
           <source src="media/videos/open_retrieve_striped_dress.mp4" type="video/mp4">
         </video>
       </div>
@@ -465,36 +424,39 @@
         margin-bottom: 0.6em;">
       Real Videos
     </h3>
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center;">
-      <div>
-        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Sequentially Retrieve (Closed)</h4>
-      </div>
-      <div>
-        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Retrieve Hat (Closed)</h4>
-      </div>
-      <div>
-        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Sequentially Retrieve (Open)</h4>
-      </div>
-      <div>
-        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Retrieve Glove (Open)</h4>
-      </div>
-      <div>
-        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+    <div style="display: flex; justify-content: center; gap: 20px;">
+      <div style="text-align: center;">
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">
+          Sequentially Retrieve (Closed)
+        </h4>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 500px;">
           <source src="media/videos/real_close_retrieve_garments_sequentially.mp4" type="video/mp4">
         </video>
       </div>
-      <div>
-        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+      <div style="text-align: center;">
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">
+          Retrieve Hat (Closed)
+        </h4>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 500px;">
           <source src="media/videos/real_close_retrieve_hat.mp4" type="video/mp4">
         </video>
       </div>
-      <div>
-        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+    </div>
+    <br>
+    <div style="display: flex; justify-content: center; gap: 20px;">
+      <div style="text-align: center;">
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">
+          Sequentially Retrieve (Open)
+        </h4>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 500px;">
           <source src="media/videos/real_open_retrieve_garments_sequentially.mp4" type="video/mp4">
         </video>
       </div>
-      <div>
-        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+      <div style="text-align: center;">
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">
+          Retrieve Glove (Open)
+        </h4>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 500px;">
           <source src="media/videos/real_open_retrieve_glove.mp4" type="video/mp4">
         </video>
       </div>
