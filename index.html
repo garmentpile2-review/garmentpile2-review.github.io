@@ -56,12 +56,13 @@
     <div class="container is-fullhd">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <img src="media/images/GarmentPile++_title.png" alt="ReKep" style="display: block; margin: 0 auto; width: 50%">
           <br>
-          <img src="media/images/GarmentPile++_subtitle.png" alt="ReKep" style="display: block; margin: 0 auto; width: 90%">
+          <img src="media/images/GarmentPile++_title.png" alt="ReKep" style="display: block; margin: 0 auto; width: 55%">
+          <br>
+          <img src="media/images/GarmentPile++_subtitle.png" alt="ReKep" style="display: block; margin: 0 auto; width: 70%">
           <br>
           <!-- <h1 class="title is-1 publication-title" style="color:#775295;">in Imitation Learning for Robotic Manipulation</h1> -->
-          <div class="is-size-4 accepted" style="color:#ad1010">
+          <div class="is-size-4 accepted" style="color:#000000">
             Under Review
           </div>
           <!-- <div class="is-size-4 award" style="color:#ad1010">
@@ -146,537 +147,385 @@
 <br>
 <div class="container is-max-widescreen">
 <div class="columns is-centered has-text-centered">
-  <div class="column is-four-fifths">
-    <h2 class="title is-3" style="margin-bottom: 0.5em; color:#ad1010">Abstract</h2>
+  <div class="column" style="flex: none; width: 100%;">
+    <!-- <h2 style="
+        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
+        font-size: 2.2em; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 0.6em;
+        border-bottom: 1px solid #eef;">
+      Overview
+    </h2> -->
+    <img src="media/images/Teaser.jpg" class="method-image" style="max-width: 99%;" />
+    <br>
+    <p class="content has-text-justified" style="margin-bottom: 0.6em">
+          <b>GarmentPile++</b> mainly includes three stages:
+      <ol style="
+        list-style-position: outside;
+        margin-left: 1.5em;
+        padding-left: 1.2em;
+        text-align: left;
+      ">
+        <li style="margin: .6em 0;"><b>Which to Retrieve</b>: Leveraging SAM2 (with optionally triggered mask fine tuning), masks of garments are obtained to provide visual cues for aiding VLM-based reasoning on the optimal garment to retrieve under task constraints.</li>
+        <li style="margin: .6em 0;"><b>Where to Retrieve</b>: The Retrieval Affordance Model infers optimal grasp points for the target garment, maximizing single-arm retrieval feasibility while ensuring the garment's safety and cleanliness.</li>
+        <li style="margin: .6em 0;"><b>How to Retrieve</b>: For large/long garments, single-arm retrieval may be unfeasible. The single-arm grasping condition is therefore fed to VLM to determine whether dual-arm cooperation is required, ensuring smooth garment retrieval.</li>
+      </ol>
+    </p>
+  </div>
+</div>
+<br>
+<div class="columns is-centered has-text-centered">
+  <div class="column" style="flex: none; width: 75%;">
+    <h2 style="
+        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
+        font-size: 2.2em; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 0.6em;
+        border-bottom: 1px solid #eef;">
+      Abstract
+    </h2>
     <div class="content has-text-justified">
       <p>
         Garment manipulation has attracted increasing attention due to its critical role in home-assistant robotics.
         However, the majority of existing garment manipulation works assume an initial state consisting of only one garment,
         while piled garments are far more common in real-world settings.
-        To bridge this gap, we propose a novel garment retrieval pipeline that can not only follow language instruction to execute safe and clean retrieval but also guarantee exactly one garment is retrieved per attempt,
+      </p>
+      <p>
+        To bridge this gap, we propose a novel garment retrieval pipeline that can not only <b>follow language instruction</b> to execute <b>safe and clean retrieval</b> but also guarantee <b>exactly one garment</b> is retrieved per attempt,
         establishing a robust foundation for the execution of downstream tasks (e.g., folding, hanging, wearing).
         Our pipeline seamlessly integrates vision-language reasoning with visual affordance perception,
-        fully leveraging the high-level reasoning and planning capabilities of VLMs alongside the generalization power of visual affordance for low-level actions.
+        fully leveraging the <b>high-level reasoning and planning capabilities of VLMs</b> alongside the generalization power of visual affordance for low-level actions.
+      </p>
+      <p>
         To enhance the VLM's comprehensive awareness of each garment's state within a garment pile,
-        we employ visual segmentation model (SAM2) to execute object segmentation on the garment pile for aiding VLM-based reasoning with sufficient visual cues.
-        A mask fine-tuning mechanism is further integrated to address scenarios where the initial segmentation results are suboptimal.
-        In addition, a dual-arm cooperation framework is deployed to address cases involving large or long garments, as well as excessive garment sagging caused by incorrect grasping point determination, both of which are strenuous for a single arm to handle.
+        we employ visual segmentation model (SAM2) to execute <b>object segmentation</b> on the garment pile for aiding VLM-based reasoning with sufficient <b>visual cues</b>.
+        A <b>mask fine-tuning mechanism</b> is further integrated to address scenarios where the initial segmentation results are suboptimal.
+      </p>
+      <p>
+        In addition, a <b>dual-arm cooperation framework</b> is deployed to address cases involving large or long garments, as well as excessive garment sagging caused by incorrect grasping point determination, both of which are strenuous for a single arm to handle.
         The effectiveness of our pipeline are consistently demonstrated across diverse tasks and varying scenarios in both real-world and simulation environments.
       </p>
     </div>
   </div>
 </div>
-
 <br>
-<br>
-<div class="rows is-centered has-text-centered">
-  <h2 class="title is-3" style="margin-bottom: 0.5em; color:#ad1010">Overview</h2>
-  <!-- <img src="media/images/Teaser.jpg" class="method-image" /> -->
-  <!-- <div class="columns is-vcentered  is-centered">
-    <video id="teaser" autoplay muted loop  height="90%" width="90%">
-      <source src="media/videos/curve.mp4"
-              type="video/mp4">
-    </video>
-  </div> -->
-  <!-- button -->
-  <div style="display: flex; justify-content: center; gap: 1em; margin-bottom: 1em;">
-    <button class="button is-outlined" id="btn-static"
-      style="color: #ad1010; border-color: #ad1010;" onclick="showStatic()">
-      Static
-    </button>
-    <button class="button is-outlined" id="btn-workflow"
-      style="color: #ad1010; border-color: #ad1010;" onclick="showWorkflow()">
-      Workflow
-    </button>
-  </div>
-
-  <!-- img (default visible) -->
-  <div id="staticContent" class="has-text-centered">
-    <img src="media/images/Teaser.jpg" class="method-image" style="max-width: 100%;" />
-  </div>
-
-  <!-- vedio (default hidden) -->
-  <div id="workflowContent" class="has-text-centered" style="display: none;">
-    <video controls muted autoplay loop controlsList="nodownload" width="99%">
-      <source src="media/videos/Teaser_Workflow.mp4" type="video/mp4">
+<div class="columns is-centered has-text-centered">
+  <div class="column" style="flex: none; width: 75%;">
+    <h2 style="
+        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
+        font-size: 2.2em; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 0.6em;
+        border-bottom: 1px solid #eef;">
+      Video
+    </h2>
+    <video controls muted autoplay loop controlsList="nodownload" width="95%">
+        <source src="media/videos/supp_video.mp4" type="video/mp4">
     </video>
   </div>
-  <br>
-  <p class="content has-text-justified" style="margin-bottom: 0.6em">
-    <b>DexGarmentLab</b> includes three major components:
-    <br>
-    &nbsp;&nbsp;- <b>Environment</b>: We propose <u>Dexterous Garment Manipulation Environment</u> with 15 different task scenes (especially for bimanual coordination) based on 2500+ garments.
-    <br>
-    &nbsp;&nbsp;- <b>Automated Data Collection</b>: Because of the same structure of category-level garment, category-level generalization is accessible, which empowers our proposed <u>Automated Data Collection Pipeline</u> to handle different position, deformation and shapes of garment with task config (including grasp position and task sequence) and grasp hand pose provided by single expert demonstration.
-    <br>
-    &nbsp;&nbsp;- <b>Generalizable Policy</b>: With diverse collected demonstration data, we introduce <u> <b>H</b>ierarchical g<b>A</b>rment manipu<b>L</b>ation p<b>O</b>licy (<b>HALO</b>) </u>, combining affordance points and trajectories to generalize across different attributes in different tasks.
-  </p>
 </div>
-
 <br>
-<br>
-<div class="rows is-centered has-text-centered">
-  <h2 class="title is-3" style="margin-bottom: 0.5em; color:#ad1010">Simulation Environment</h2>
-  <p class="content has-text-justified" style="margin-bottom: 0.6em">
-    We introduce adhesion (<i>between particle and rigid</i>), friction (<i>between particle and rigid</i>) and particle-scale (<i>between particles</i>) parameters to enhance realism for physical garment simulation.
-  </p>
-  <img src="media/images/Garment-Robot-Interaction.jpg" class="method-image" />
-  <br>
-  <p class="content has-text-justified" style="margin-bottom: 0.6em">
-    <b>Benefiting from friction and adhesion, dexhands can grasp and lift garments based on physical force without attach blocks.</b>
-  </p>
-  <img src="media/images/Garment-Self-Interaction.jpg" class="method-image" />
-  <br>
-  <p class="content has-text-justified" style="margin-bottom: 0.6em">
-    <b>Particle-adhesion (or -friction)-scale stabilizes the particle system, preventing excessive self-collisions between particles which cause garments to become disorganized.</b>
-  </p>
-  <img src="media/images/Benchmark.jpg" class="method-image" />
-  <!-- <div class="columns is-vcentered  is-centered">
-    <video id="teaser" autoplay muted loop  height="90%" width="90%">
-      <source src="media/videos/curve.mp4"
-              type="video/mp4">
-    </video>
-  </div> -->
-  <br>
-  <p class="content has-text-justified" style="margin-bottom: 0.6em">
-    We introduce 15 garment manipulation tasks across 8 categories, 
-    encompassing both <b>garment-self-interaction</b> (e.g., Fling, Fold) and <b>garment-environment-interaction</b> (e.g., Hang, Wear, Store) scenarios.
-    In garment-self-interaction tasks, key variables include garment position, orientation, and shape. In garment-environment-interaction tasks, environment-interaction assets positions (e.g., hangers, pothooks, humans, etc.) are also considered.
-  </p>
+<div class="columns is-centered has-text-centered">
+  <div class="column" style="flex: none; width: 100%;">
+    <h2 style="
+        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
+        font-size: 2.2em; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 0.4em; 
+        padding-bottom: 0.2em;
+        border-bottom: 1px solid #eef;">
+      Pipeline 
+    </h2>
+    <img src="media/images/Pipeline.jpg" class="method-image" />
+    <p class="content has-text-justified" style="margin-bottom: 0.6em">
+      Given the initial observation, <b>SAM2</b> segments the garment pile. Due to pile complexity,
+      masks may be inaccurate, thus optionally triggering <b>mask fine tuning procedure</b> (Bottom-Left, red) based on <b>VLM reasoning</b>.
+    </p>
+    <p class="content has-text-justified" style="margin-bottom: 0.6em">
+      The finalized mask and observation are then passed to the VLM to select the target garment under task constraints.
+      Treating the target mask as garment pile point-cloud feature, the <b>Retrieval Affordance Model (RAM)</b> predicts single-arm grasp points,
+      which is used for single-arm retrieval.
+      Then the post-grasp observation is requeried by the VLM to decide on <b>dual-arm cooperation</b>;
+      if required, a tracking-selection module (Bottom-Right, green) produces cooperative grasp points to ensure successful retrieval.
+    </p>
+    <p class="content has-text-justified" style="margin-bottom: 0.6em">
+      What's more, if VLM detects the single-arm grasp of more than one garment, the current retrieval will be terminated.
+    </p>
+  </div>
 </div>
-
 <br>
+<div class="columns is-centered has-text-centered">
+  <div class="column" style="flex: none; width: 100%;">
+    <h2 style="
+        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
+        font-size: 2.2em; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 0.6em;
+        border-bottom: 1px solid #eef;">
+      Results
+    </h2>
+    <div style="text-align: left;">
+      <p>
+        We load 9 categories (dress, trousers, tops, skirt, socks, glove, hat, scarf and underpants) of 153 different garments from ClothesNet.
+        In the Open-Boundary Scenario, 6–16 garments will be loaded to form garment piles; in the Closed-Boundary Scenario, the quantity of garments employed will be 3–8. 
+        What's more, there are two types of typical tasks conducted in each scenario:
+      </p>
+      <ul style="list-style-type: disc; padding-left: 2em;">
+        <li>
+          <i>Task A: Retrieve Garments Sequentially.</i> 
+          The robot is required to continue retrieving until no garments remain in the observation field.
+        </li>
+        <li>
+          <i>Task B: Retrieve a Piece of Specific Garment.</i> 
+          The robot needs to retrieve until the target garment (e.g., hat, glove, green tops, black trousers, etc.) is retrieved.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 <br>
-<div class="rows is-centered has-text-centered">
-  <h2 class="title is-3" style="margin-bottom: 0.5em; color:#ad1010">Automated Data Collection</h2>
-  <!-- <img src="media/images/Data_Collection.jpg" class="method-image" /> -->
-  <!-- <div class="columns is-vcentered  is-centered">
-    <video id="teaser" autoplay muted loop  height="90%" width="90%">
-      <source src="media/videos/curve.mp4"
-              type="video/mp4">
-    </video>
-  </div> -->
-  <!-- button -->
-  <div style="display: flex; justify-content: center; gap: 1em; margin-bottom: 1em;">
-    <button class="button is-outlined" id="btn-static_1"
-      style="color: #ad1010; border-color: #ad1010;" onclick="showStatic_1()">
-      Static
-    </button>
-    <button class="button is-outlined" id="btn-workflow_1"
-      style="color: #ad1010; border-color: #ad1010;" onclick="showWorkflow_1()">
-      Workflow
-    </button>
-  </div>
-
-  <!-- image (default visible) -->
-  <div id="staticContent_1" class="has-text-centered">
-    <img src="media/images/Data_Collection.jpg" class="method-image" style="max-width: 100%;" />
-  </div>
-
-  <!-- vedio (default hidden) -->
-  <div id="workflowContent_1" class="has-text-centered" style="display: none;">
-    <video controls muted autoplay loop controlsList="nodownload" width="99%">
-      <source src="media/videos/Data_Workflow.mp4" type="video/mp4">
-    </video>
-  </div>
-  <br>
-  <p class="content has-text-justified" style="margin-bottom: 0.6em">
-    <b>Automated Data Collection Pipeline: </b>
+<div class="columns is-centered has-text-centered">
+  <div class="column" style="flex: none; width: 84%;">
+    <h3 style="
+        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
+        font-size: 1.8em; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 0.6em;">
+      Mask Fine Tuning
+    </h3>
+    <!-- image (default visible) -->
+    <div id="staticContent_1" class="has-text-centered">
+      <img src="media/images/Mask_Fine_Tuning.png" class="method-image" style="max-width: 99%;" />
+    </div>
+    <div style="text-align: left;">
+      <p>
+        Initial segmentation result (left-side images of each part) may be flawed: 
+        e.g., a mask covering multiple garments (mask 1 in blue part row 1, 2; mask 1 in orange part row 1), 
+        fragmented masks (mask 5 in orange part row 2; mask 4,6,7 in green part), 
+        or color confusion (mask 7 in cyan part covering two white garments). 
+        ✩ denotes the lift point for tuning. 
+        After fine tuning, the adjusted masks (right-side images of each part) are clearly more reasonable, 
+        with each mask generally corresponding to a single complete garment.
+      </p>
+    </div>
     <br>
-    &nbsp;&nbsp; (1) For a given task, we begin with a single expert demonstration to extract key information: <b>demo hand grasp poses</b>, <b>demo task sequences</b>, and <b>demo grasp points on the garment</b>. 
+    <h3 style="
+        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
+        font-size: 1.8em; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 0.6em;">
+      Affordance
+    </h3>
+    <!-- image (default visible) -->
+    <div id="staticContent_1" class="has-text-centered">
+      <img src="media/images/Affordance.png" class="method-image" style="max-width: 70%;" />
+    </div>
+    <div style="text-align:left;">
+      <p>
+        The color transition (blue → green → red) indicates an increasing affordance level. 
+        Beyond generalization across different garment types, the affordance further captures: 
+        <b>garment geometry</b> (row 1, center regions of garments are typically preferable.), 
+        <b>subtle structures</b> (row 4, garment wrinkle regions easier to grasp exhibit higher affordance level.), 
+        <b>spatial relations</b> (row 3 left, grasping left / right region of glove is equivalent, but the right side is preferable due to fewer garments, as well as tops side of garment in row 3 right; row 2, central regions far from closed boundaries are preferable for grasp safety.)
+      </p>
+    </div>
     <br>
-    &nbsp;&nbsp; (2) Leveraging the <b>Garment Affordance Model (GAM)</b>, we use affordance to identify target grasp points on novel garments with diverse deformations corresponding to demo grasp points. 
+    <h3 style="
+        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
+        font-size: 1.8em; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 0.6em;">
+      Reasoning Procedure
+    </h3>
+    <!-- image (default visible) -->
+    <div id="staticContent_1" class="has-text-centered">
+      <img src="media/images/Reasoning_Procedure.png" class="method-image" style="max-width: 99%;" />
+    </div>
+    <div style="text-align: left;">
+      <p>
+        For sequential garment retrieval (rows 1 and 3), the VLM infers the most suitable garment to retrieve
+        (e.g., topmost or with simpler entanglement) to maximize overall success.
+        For specific garment retrieval (row 2), it inters to remove obstructing garments so that the target garment is quickly exposed and ready for retrieving.
+      </p>
+    </div>
     <br>
-    &nbsp;&nbsp; (3) Finally, the pipeline executes the task sequence based on inferred points and hand grasp poses, thereby enabling <b>automated, efficient and scalable data collection</b>.
-    <br>
-    <b>Attention:</b> The trajectories are adaptive to garment strctures and scene configurations, 
-    which means for different garments and scenes, the trajectories (including lifting height, push position, etc.) are different.
-  </p>
-  <p class="content has-text-justified" style="margin-bottom: 0.6em">
-    Here shows task initialization and randomization figure of different tasks and three whole-procedure videos each task with different configurations.
-  </p>
-
-  <h4 class="title is-3" style="margin-bottom: 0.5em; color:#e67979; font-size: 28px;">Task Configuration Diagram</h4>
-
-  <div class="columns">
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_fold_tops.jpg" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Fold Tops</figcaption>
-      </figure>
+    <h3 style="
+        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
+        font-size: 1.8em; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 0.6em;">
+      Real-World Setup
+    </h3>
+    <div id="staticContent_1" class="has-text-centered">
+      <img src="media/images/Real_World_Setup.png" class="method-image" style="max-width: 75%;" />
     </div>
-
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_fold_dress.png" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Fold Dress</figcaption>
-      </figure>
-    </div>
-
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_fold_trousers.png" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Fold Trousers</figcaption>
-      </figure>
-    </div>
+    <p>
+    We use ARX x7s as real-world robot and RealSense D405 as head camera for images capture.
+    </p>
   </div>
-
-  <div class="columns">
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_fling_tops.png" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Fling Tops</figcaption>
-      </figure>
-    </div>
-
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/fling_ori_randomization.png" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Fling orientation randomization</figcaption>
-      </figure>
-    </div>
-
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_fling_dress.png" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Fling Dress</figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <div class="columns">
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_fling_trousers.png" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Fling Trousers</figcaption>
-      </figure>
-    </div>
-
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_hang_coat.png" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Hang Coat</figcaption>
-      </figure>
-    </div>
-
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_store_tops.png" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Store Tops</figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <div class="columns">
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_hang_tops.png" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Hang Tops</figcaption>
-      </figure>
-    </div>
-
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_hang_dress.png" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Hang Dress</figcaption>
-      </figure>
-    </div>
-
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_hang_trousers.jpg" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Hang Trousers</figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <div class="columns">
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_wear_baseballcap.png" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Wear Baseball Cap</figcaption>
-      </figure>
-    </div>
-
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_wear_bowlhat.png" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Wear Bowl Hat</figcaption>
-      </figure>
-    </div>
-
-    <div class="column has-text-centered">
-      <figure>
-        <img src="media/images/task_wear_scarf.png" class="method-image" />
-        <figcaption style="margin-top: 0.5em;">Wear Scarf</figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <h4 class="title is-3" style="margin-bottom: 0.5em; color:#e67979; font-size: 28px;">Task Whole-Procedure Vedio</h4>
-
-  <div class="container block is-centered">
-    <div class="columns is-centered">
-      <div class="column is-3">
-        <div class="select is-fullwidth">
-          <select id="task-selection" onchange="updateVideos()">
-            <option value="fling_dress">fling_dress</option>
-            <option value="fling_tops">fling_tops</option>
-            <option value="fling_trousers">fling_trousers</option>
-            <option value="fold_tops">fold_tops</option>
-            <option value="fold_dress">fold_dress</option>
-            <option value="fold_trousers">fold_trousers</option>
-            <option value="hang_coat" selected>hang_coat</option>
-            <option value="hang_dress">hang_dress</option>
-            <option value="hang_tops">hang_tops</option>
-            <option value="hang_trousers">hang_trousers</option>
-            <option value="wear_baseballcap">wear_baseballcap</option>
-            <option value="wear_bowlhat">wear_bowlhat</option>
-            <option value="wear_scarf">wear_scarf</option>
-            <option value="wear_glove">wear_glove</option>
-            <option value="store_tops">store_tops</option>
-          </select>
-        </div>
+</div>
+<br>
+<div class="columns is-centered has-text-centered">
+  <div class="column" style="flex: none; width: 100%;">
+    <h2 style="
+        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
+        font-size: 2.2em; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 0.6em;
+        border-bottom: 1px solid #eef;">
+      Demo
+    </h2>
+    <h3 style="
+        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
+        font-size: 1.8em; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 0.6em;">
+      Simulation Videos
+    </h3>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center;">
+      <div style="grid-column: span 2;">
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Sequentially Retrieve (Closed)</h4>
       </div>
-      <div class="column is-2">
-        <button class="button is-info is-outlined" id="shuffle-video" style="width: 100%; color: #ad1010; border-color: #ad1010;">
-          <span class="icon">
-            <ion-icon name="shuffle-outline" role="img" class="md hydrated"></ion-icon>
-          </span>
-          <span>Shuffle</span>
-        </button>
+      <div>
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Retrieve <span style="color: cyan;">Cyan</span> Tops (Closed)</h4>
+      </div>
+      <div>
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Retrieve Glove (Closed)</h4>
+      </div>
+      <div>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+          <source src="media/videos/close_retrieve_sequentially_1.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+          <source src="media/videos/close_retrieve_sequentially_2.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+          <source src="media/videos/close_retrieve_cyan_tops.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+          <source src="media/videos/close_retrieve_glove.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
-  </div>
-
-  <div id="video-container" class="columns is-centered">
-    <div class="column has-text-centered">
-      <video controls muted autoplay loop controlsList="nodownload" width="99%">
-        <source src="media/videos/data_collection/hang_coat/0.mp4" type="video/mp4">
-      </video>
+    <br>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center;">
+      <div style="grid-column: span 2;">
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Sequentially Retrieve (Open)</h4>
+      </div>
+      <div>
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Retrieve <span style="color: red;">Red</span> Pants (Open)</h4>
+      </div>
+      <div>
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Retrieve Striped Dress (Open)</h4>
+      </div>
+      <div>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+          <source src="media/videos/open_retrieve_sequentially_1.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+          <source src="media/videos/open_retrieve_sequentially_2.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+          <source src="media/videos/open_retrieve_red_pants.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+          <source src="media/videos/open_retrieve_striped_dress.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
-    <div class="column has-text-centered">
-      <video controls muted autoplay loop controlsList="nodownload" width="99%">
-        <source src="media/videos/data_collection/hang_coat/1.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="column has-text-centered">
-      <video controls muted autoplay loop controlsList="nodownload" width="99%">
-        <source src="media/videos/data_collection/hang_coat/2.mp4" type="video/mp4">
-      </video>
+    <br>
+    <h3 style="
+        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
+        font-size: 1.8em; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 0.6em;">
+      Real Videos
+    </h3>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center;">
+      <div>
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Sequentially Retrieve (Closed)</h4>
+      </div>
+      <div>
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Retrieve Hat (Closed)</h4>
+      </div>
+      <div>
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Sequentially Retrieve (Open)</h4>
+      </div>
+      <div>
+        <h4 style="font-weight: 700; margin-bottom: 0.5em;">Retrieve Glove (Open)</h4>
+      </div>
+      <div>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+          <source src="media/videos/real_close_retrieve_garments_sequentially.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+          <source src="media/videos/real_close_retrieve_hat.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+          <source src="media/videos/real_open_retrieve_garments_sequentially.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div>
+        <video controls muted autoplay loop controlsList="nodownload" style="width: 100%;">
+          <source src="media/videos/real_open_retrieve_glove.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- <br>
-<br>
-<br>
-<section class="section" style="padding: 0;">
-  <div class="container is-max-widescreen">
-
-    <div class="rows">
-
-      <div class="container has-text-centered">
-        <h2 class="title is-3" style="margin-bottom: 0.5em; color:#ad1010">Gneralizable Policy (HALO)</h2>
-        <div style="display: flex; justify-content: center; gap: 1em; margin-bottom: 1em;">
-          <button class="button is-outlined" id="btn-static_2"
-            style="color: #ad1010; border-color: #ad1010;" onclick="showStatic_2()">
-            Static
-          </button>
-          <button class="button is-outlined" id="btn-workflow_2"
-            style="color: #ad1010; border-color: #ad1010;" onclick="showWorkflow_2()">
-            Workflow
-          </button>
-        </div>
-
-        <div id="staticContent_2" class="has-text-centered">
-          <img src="media/images/Policy.jpg" class="method-image" style="max-width: 100%;" />
-        </div>
-
-        <div id="workflowContent_2" class="has-text-centered" style="display: none;">
-          <video controls muted autoplay loop controlsList="nodownload" width="99%">
-            <source src="media/videos/Policy_Workflow.mp4" type="video/mp4">
-          </video>
-        </div>
-        <br>
-        <p class="content" style="margin-bottom: 1.5em; text-align: left;">
-          We adopt hierarchical structure to implement Generalizable Policy (HALO), achieving better generalization in garment manipulation than previous imitation learning algorithms, 
-          which consists of two stages:
-          <br>
-          &nbsp;&nbsp; <b>Stage &#8544;</b>: We use <b>GAM</b> to generate generalizable affordance points, which will be used for robots to locate and move to target area.
-          <br>
-          &nbsp;&nbsp; <b>Stage &#8545;</b>: we introduce <b>Structure-Aware Diffusion Policy (SADP)</b>, 
-          which extracts features from <u>garment point cloud (with left and right point affordances as binding features)</u>, 
-          <u>interaction-object point cloud</u>, <u>environment point cloud</u> and <u>robot joint states</u> as condition to generate joint actions 
-          (including 24 DOF for each hand and 6 DOF for each arm, totally 60 DOF).
-          <br>
-          Please refer to paper for detailed analysis. Here we show the real-world setup and execution of HALO.
-        </p>
-
-        <h3 class="title is-3" style="margin-bottom: 0.5em; color:#e67979; font-size: 28px;">Real-World Setup</h3>
-
-        <div class="column has-text-centered">
-          <figure>
-            <img src="media/images/setup.jpg" class="method-image" />
-            <figcaption style="margin-top: 0.5em;">Real-World Setup</figcaption>
-          </figure>
-        </div>
-
-        <div class="columns">
-          <div class="column has-text-centered">
-            <figure>
-              <img src="media/images/fold_test_sample.jpg" class="method-image" />
-              <figcaption style="margin-top: 0.5em;">Test Samples (Fold Tops Task)</figcaption>
-            </figure>
-          </div>
-
-          <div class="column has-text-centered">
-            <figure>
-              <img src="media/images/hang_test_sample.jpg" class="method-image" />
-              <figcaption style="margin-top: 0.5em;">Test Samples (Hang Tops Task)</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="columns">
-          <div class="column has-text-centered">
-            <figure>
-              <img src="media/images/hat_test_sample.jpg" class="method-image" />
-              <figcaption style="margin-top: 0.5em;">Test Samples (Wear Hat Task)</figcaption>
-            </figure>
-          </div>
-
-          <div class="column has-text-centered">
-            <figure>
-              <img src="media/images/scarf_test_sample.jpg" class="method-image" />
-              <figcaption style="margin-top: 0.5em;">Test Samples (Wear Scarf Task)</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <h3 class="title is-3" style="margin-bottom: 0.5em; color:#e67979; font-size: 28px;">Real-World Videos</h3>
-
-        <div id="video-container" class="columns is-centered">
-          <div class="column has-text-centered">
-            <video controls muted autoplay loop controlsList="nodownload" width="99%">
-              <source src="media/videos/real_world/fold_tops_1.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column has-text-centered">
-            <video controls muted autoplay loop controlsList="nodownload" width="99%">
-              <source src="media/videos/real_world/fold_tops_2.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column has-text-centered">
-            <video controls muted autoplay loop controlsList="nodownload" width="99%">
-              <source src="media/videos/real_world/fold_tops_3.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-
-        <p style="text-align: center; margin-top: 0.15; font-size: 16px; color: #333;">
-          <b>Fold Tops</b> Real-World Videos
-        </p>
-
-        <br>
-
-        <div id="video-container" class="columns is-centered">
-          <div class="column has-text-centered">
-            <video controls muted autoplay loop controlsList="nodownload" width="99%">
-              <source src="media/videos/real_world/hang_tops_1.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column has-text-centered">
-            <video controls muted autoplay loop controlsList="nodownload" width="99%">
-              <source src="media/videos/real_world/hang_tops_2.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column has-text-centered">
-            <video controls muted autoplay loop controlsList="nodownload" width="99%">
-              <source src="media/videos/real_world/hang_tops_3.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-
-        <p style="text-align: center; margin-top: 0.15; font-size: 16px; color: #333;">
-          <b>Hang Tops</b> Real-World Videos
-        </p>
-
-        <br>
-
-        <div id="video-container" class="columns is-centered">
-          <div class="column has-text-centered">
-            <video controls muted autoplay loop controlsList="nodownload" width="99%">
-              <source src="media/videos/real_world/wear_hat_1.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column has-text-centered">
-            <video controls muted autoplay loop controlsList="nodownload" width="99%">
-              <source src="media/videos/real_world/wear_hat_2.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column has-text-centered">
-            <video controls muted autoplay loop controlsList="nodownload" width="99%">
-              <source src="media/videos/real_world/wear_hat_3.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-
-        <p style="text-align: center; margin-top: 0.15; font-size: 16px; color: #333;">
-          <b>Wear Hat</b> Real-World Videos
-        </p>
-
-        <br>
-
-        <div id="video-container" class="columns is-centered">
-          <div class="column has-text-centered">
-            <video controls muted autoplay loop controlsList="nodownload" width="99%">
-              <source src="media/videos/real_world/wear_scarf_1.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column has-text-centered">
-            <video controls muted autoplay loop controlsList="nodownload" width="99%">
-              <source src="media/videos/real_world/wear_scarf_2.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column has-text-centered">
-            <video controls muted autoplay loop controlsList="nodownload" width="99%">
-              <source src="media/videos/real_world/wear_scarf_3.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-
-        <p style="text-align: center; margin-top: 0.15; font-size: 16px; color: #333;">
-          <b>Wear Scarf</b> Real-World Videos
-        </p>
-
-        <br>
-        <p class="content has-text-justified" style="margin-bottom: 0.6em">
-          We select Fold_Tops (Garment-Self-Interaction), Hang_Tops, Wear_Scarf, Wear_Hat (Garment-Environment-Interaction) as typical tasks for illustration. 
-          The test samples have different shapes, length, deformations while position of garments and interaction objects are variable. 
-          Despite this, <b>GAM of HALO</b> ensures <u>accurate manipulation area location for grasp</u> while <b>SADP of HALO</b> ensures <u>adaptive trajectories base on garment and interaction object</u>.
-         </p>
-      </div>
-    </div>
+<div class="columns is-centered has-text-centered">
+  <div class="column" style="flex: none; width: 100%;">
+    <h2 style="
+        font-family: Georgia, 'Cambria', 'Times New Roman', serif;
+        font-size: 2.2em; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 0.6em;">
+      BibTeX
+    </h2>
+    <p class="bibtex" style="text-align: left;">
+      @misc{,<br>
+      &nbsp;&nbsp;title={GarmentPile++: Affordance-Driven Cluttered Garments Retrieval with Vision-Language Reasoning},<br>
+      &nbsp;&nbsp;author={},<br>
+      &nbsp;&nbsp;year={},<br>
+      &nbsp;&nbsp;eprint={},<br>
+      &nbsp;&nbsp;archivePrefix={arXiv},<br>
+      &nbsp;&nbsp;primaryClass={cs.RO},<br>
+      &nbsp;&nbsp;url={},<br>
+      }
+    </p>
   </div>
-</section> -->
+</div>
 
-<!-- <br>
-<br>
-<h2 class="title is-3 is-centered has-text-centered" style="color:#ad1010;">BibTeX</h2>
-<p class="bibtex">
-@misc{wang2025dexgarmentlab,<br>
-&nbsp;&nbsp; title={DexGarmentLab: Dexterous Garment Manipulation Environment with Generalizable Policy},<br>
-&nbsp;&nbsp; author={Yuran Wang and Ruihai Wu and Yue Chen and Jiarui Wang and Jiaqi Liang and Ziyu Zhu and Haoran Geng and Jitendra Malik and Pieter Abbeel and Hao Dong},<br>
-&nbsp;&nbsp; year={2025},<br>
-&nbsp;&nbsp; eprint={2505.11032},<br>
-&nbsp;&nbsp; archivePrefix={arXiv},<br>
-&nbsp;&nbsp; primaryClass={cs.RO},<br>
-&nbsp;&nbsp; url={https://arxiv.org/abs/2505.11032},<br>
-}
-</p> -->
-
-</section>
 </div>
 
 <footer class="footer">
